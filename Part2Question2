@@ -1,0 +1,31 @@
+# Import TSP library
+import tsp
+
+# List to hold the stops in the correct order
+stops = []
+
+# List of locations/order as entered in the adjacency matrix
+locations = ["ALU", "CBD", "Kanombe", "Kimironko", "Kacyiru"]
+
+# Adjacency matrix to hold the distances/cost between locations
+matrix = [[0, 10, 8, 9, 7], [10, 0, 10, 5, 6],
+             [8, 10, 0, 8, 9], [9, 5, 8, 0, 6], [7, 6, 9, 6, 0]]
+
+r = range(len(matrix))
+
+# Get nodes
+nodesToTraverse = {(i, j): matrix[i][j] for i in r for j in r}
+
+# Calculate cost of shortest path and find the least expensive path using TSP
+results = tsp.tsp(r, nodesToTraverse)
+
+# Extract route taken from results tuple
+routeTaken = results[1]
+
+# Convert route to strings, i.e names of locations
+for i in routeTaken:
+    y = routeTaken[i]
+    stops.append(locations[y])
+
+print("Locations are to be traversed in the following order " + str(stops))
+print("Shortest route costs " + str(results[0]) + " to traverse.")
